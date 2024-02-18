@@ -47,21 +47,24 @@ class Popular_Books extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
-                          fixedSize: Size(80, 30),
+                          fixedSize: const Size.fromWidth(100),
                         ),
                         onPressed: (){}, 
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               '\$',
                               style: TextStyle(
-                                color: Colors.white
+                                color: Colors.white,
+                                fontSize: 18
                               ),
                             ),
                             Text(
                               book.price.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
+                                fontSize: 18
                               ),
                             )
                           ],
