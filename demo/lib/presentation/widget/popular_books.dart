@@ -74,6 +74,7 @@ class Popular_Books extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(width: 10),
             ],
           );
         }).toList(),
