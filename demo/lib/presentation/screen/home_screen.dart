@@ -1,5 +1,4 @@
 import 'package:demo/models/books.dart';
-import 'package:demo/presentation/screen/categories_screen.dart';
 import 'package:demo/presentation/widget/adventure_books.dart';
 import 'package:demo/presentation/widget/anime_books.dart';
 import 'package:demo/presentation/widget/headline.dart';
@@ -7,14 +6,13 @@ import 'package:demo/presentation/widget/horror_books.dart';
 import 'package:demo/presentation/widget/novel_books.dart';
 import 'package:demo/presentation/widget/popular_books.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Home_Screen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     List<Books> popularBooks = Books.generatePopularBooks();
     List<Books> animeBooks = Books.generateAnimeBooks();
-    List<Books> adventurBooks = Books.generateAdventureBooks();
+    List<Books> adventureBooks = Books.generateAdventureBooks();
     List<Books> horrorBooks = Books.generateHorrorBooks();
     List<Books> novelBooks = Books.generateNovelBooks();
     double height = MediaQuery.of(context).size.height;
@@ -143,7 +141,7 @@ class Home_Screen extends StatelessWidget{
                       // height: height / 5,
                       //height: constraints.maxHeight * 0.38,
                       margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
-                      child: AdventureBooks(booksList: adventurBooks),
+                      child: AdventureBooks(booksList: adventureBooks),
                     ),
                   ),
             
