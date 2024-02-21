@@ -13,7 +13,10 @@ class Headline extends StatelessWidget{
         children: [
           Text(
             category,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: Colors.black
+            ),
+
           ),
           InkWell(
             onTap:() {
@@ -26,7 +29,8 @@ class Headline extends StatelessWidget{
             child: Text(
               "See All",
               style: TextStyle(
-                fontSize: 20
+                fontSize: 20,
+                color: Colors.black
               ),
             ),
           )

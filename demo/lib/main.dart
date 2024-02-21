@@ -1,4 +1,5 @@
 import 'package:demo/presentation/screen/home_screen.dart';
+import 'package:demo/presentation/screen/main_screen.dart';
 import 'package:demo/presentation/widget/popular_books.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Book-Booking',
       home: SafeArea(
         child: Scaffold(
-          body: Home_Screen(),
+          body: MainScreen(),
         ),
       ),
     );
