@@ -1,5 +1,9 @@
 import 'package:demo/models/books.dart';
+import 'package:demo/presentation/widget/adventure_books.dart';
 import 'package:demo/presentation/widget/anime_books.dart';
+import 'package:demo/presentation/widget/headline.dart';
+import 'package:demo/presentation/widget/horror_books.dart';
+import 'package:demo/presentation/widget/novel_books.dart';
 import 'package:demo/presentation/widget/popular_books.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +12,9 @@ class Home_Screen extends StatelessWidget{
   Widget build(BuildContext context) {
     List<Books> popularBooks = Books.generatePopularBooks();
     List<Books> animeBooks = Books.generateAnimeBooks();
+    List<Books> adventurBooks = Books.generateAdventureBooks();
+    List<Books> horrorBooks = Books.generateHorrorBooks();
+    List<Books> novelBooks = Books.generateNovelBooks();
     double height = MediaQuery.of(context).size.height;
     
     return Scaffold(
@@ -42,7 +49,11 @@ class Home_Screen extends StatelessWidget{
                           ),
                           const Spacer(),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              // showSearch(
+                              //     context: context,
+                              //     delegate: CustomSearchDelegate());
+                            },
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               height: 50,
@@ -93,7 +104,7 @@ class Home_Screen extends StatelessWidget{
                     right: 0,
                     bottom: 0,
                     child: Container(
-                      height: height / 5.3,
+                      height: height / 5,
                       //height: constraints.maxHeight * 0.38,
                       margin: const EdgeInsets.only(left: 16),
                       child: Popular_Books(booksList: popularBooks,),
@@ -105,33 +116,87 @@ class Home_Screen extends StatelessWidget{
             // const Spacer(
             //   flex: 2,
             // ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Anime',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const Text(
-                    'See all',
-                    style: TextStyle(
-                      fontSize: 20
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(15.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         'Anime',
+            //         style: Theme.of(context).textTheme.headlineSmall,
+            //       ),
+            //       const Text(
+            //         'See all',
+            //         style: TextStyle(
+            //           fontSize: 20
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // Positioned(
+            //   left: 0,
+            //   right: 0,
+            //   bottom: 0,
+            //   child: Container(
+            //     height: height / 5.3,
+            //     //height: constraints.maxHeight * 0.38,
+            //     margin: const EdgeInsets.only(left: 16),
+            //     child: AnimeBooks(booksList: animeBooks),
+            //   ),
+            // ),
+            Headline(category: 'Anime', showAll: 'Anime'),
             Positioned(
               left: 0,
               right: 0,
               bottom: 0,
               child: Container(
-                height: height / 5.3,
+                // height: height / 5,
                 //height: constraints.maxHeight * 0.38,
-                margin: const EdgeInsets.only(left: 16),
+                margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
                 child: AnimeBooks(booksList: animeBooks),
+              ),
+            ),
+
+
+            Headline(category: 'Action & Adventure', showAll: 'Action & Adventure'),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                // height: height / 5,
+                //height: constraints.maxHeight * 0.38,
+                margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+                child: AdventureBooks(booksList: adventurBooks),
+              ),
+            ),
+
+
+            Headline(category: 'Horror', showAll: 'Horror'),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                // height: height / 5,
+                //height: constraints.maxHeight * 0.38,
+                margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+                child: HorrorBooks(booksList: horrorBooks),
+              ),
+            ),
+
+
+            Headline(category: 'Novel', showAll: 'Novel'),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                // height: height / 5,
+                //height: constraints.maxHeight * 0.38,
+                margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+                child: NovelBooks(booksList: novelBooks),
               ),
             ),
           ],

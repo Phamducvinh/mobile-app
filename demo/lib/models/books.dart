@@ -99,13 +99,205 @@ class Books {
   static List<Books> generateAnimeBooks(){
     return[
       Books(
-        imgUrl: 'assets/images/popular_books/anh1.jfif',
-        author: 'Tony Fry',
-        title: 'Writing Design Fiction',
-        categories: 'Architecture',
-        price: '208'
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
       ),
     ];
   }
 
+  static List<Books> generateAdventureBooks(){
+    return [
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+    ];
+  }
+
+  static List<Books> generateHorrorBooks(){
+    return [
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+    ];
+  }
+
+  static List<Books> generateNovelBooks(){
+    return [
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+      Books(
+        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        author: 'Fred Patten',
+        title: 'Watching Anime, Reading Manga',
+        categories: 'Performing Arts',
+        price: '360'
+      ),
+    ];
+  }
 }

@@ -14,11 +14,23 @@ class Popular_Books extends StatelessWidget {
         children: booksList.map((book) {
           return Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(book.imgUrl.toString()),
+              Card(
+                elevation: 2,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    book.imgUrl.toString(),
+                    fit: BoxFit.cover,
+                    width: 120,
+                    // height: 200,
+                  ),
+                ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               SizedBox(
                 width: 150,
                 child: Column(
@@ -29,15 +41,27 @@ class Popular_Books extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(book.author.toString()),
+                          Text(
+                            book.author.toString(),
+                            style: TextStyle(
+                              fontSize: 15
+                            ),
+                            
+                          ),
                           Text(
                             book.title.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(book.categories.toString()),
+                          Text(
+                            book.categories.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         ],
                       )
                     ),
@@ -74,7 +98,7 @@ class Popular_Books extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 50),
             ],
           );
         }).toList(),

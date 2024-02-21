@@ -1,10 +1,10 @@
-import 'package:demo/models/books.dart';
-import 'package:flutter/material.dart';
+import "package:demo/models/books.dart";
+import "package:flutter/material.dart";
 
-class AnimeBooks extends StatelessWidget{
+class NovelBooks extends StatelessWidget{
   final List<Books> booksList;
 
-  const AnimeBooks({super.key, required this.booksList});
+  const NovelBooks({super.key, required this.booksList});
   
   @override
   Widget build(BuildContext context) {
@@ -68,11 +68,11 @@ class AnimeBooks extends StatelessWidget{
                   ],
                 ),
               ),
-              SizedBox(width: 25,)
+              const SizedBox(width: 25,)
             ],
           );
         }).toList(),
       ),
     );
-  }
+  }  
 }
