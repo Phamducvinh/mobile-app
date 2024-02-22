@@ -107,35 +107,35 @@ class Books {
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
+        imgUrl: 'assets/images/anime_books/anh2.png',
+        author: 'Pubis Anime',
+        title: 'Anime Right Meow My Manga Journal',
         categories: 'Performing Arts',
-        price: '360'
+        price: '122'
       ),
       
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/anime_books/anh3.png',
+        author: 'Frenchy Lunning',
+        title: 'Mechademia 1',
+        categories: 'Art',
+        price: '214'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
+        imgUrl: 'assets/images/anime_books/anh4.png',
+        author: 'Northrop Davis',
+        title: 'Manga and Anime Go to Hollywood',
         categories: 'Performing Arts',
-        price: '360'
+        price: '439'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
+        imgUrl: 'assets/images/anime_books/anh5.png',
+        author: 'Timothy Perper',
+        title: 'Mangatopia',
         categories: 'Performing Arts',
-        price: '360'
+        price: '275'
       ),
     ];
   }
@@ -143,59 +143,59 @@ class Books {
   static List<Books> generateAdventureBooks(){
     return [
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh1.png',
+        author: 'T.L. Charles',
+        title: 'Episode Three: Mother (science fiction action adventure comedy)',
+        categories: 'Fiction',
+        price: '37'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh2.png',
+        author: 'Emma Orczy',
+        title: 'THE GREAT ADVENTURE Boxed Set: 56 Action-Adventure Classics, Spy Thrillers & Historical Novels',
+        categories: 'Fiction',
+        price: '6908'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh3.png',
+        author: 'Lucas Flint',
+        title: 'Powers (action adventure young adult superheroes)',
+        categories: 'Fiction',
+        price: '222'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh4.png',
+        author: 'Michael Anderle',
+        title: 'Tomb Raider Emeritus: An Urban Fantasy Action Adventure',
+        categories: 'Fiction',
+        price: '268'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh5.png',
+        author: 'Tony Reed',
+        title: 'Neptune Island',
+        categories: 'Fiction',
+        price: '256'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh6.png',
+        author: 'Michael Anderle',
+        title: 'Kill The Willing: An Urban Fantasy Action Adventure',
+        categories: 'Fiction',
+        price: '306'
       ),
 
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/adventure_books/anh7.png',
+        author: 'Robert E. Howard',
+        title: 'KULL OF ATLANTIS - Complete Fantasy & Action-Adventure Series',
+        categories: 'Fiction',
+        price: '100'
       ),
     ];
   }
@@ -203,46 +203,46 @@ class Books {
   static List<Books> generateHorrorBooks(){
     return [
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
+        imgUrl: 'assets/images/horror_books/anh1.png',
+        author: 'Bruce F. Kawin',
+        title: 'Horror and the Horror Film',
         categories: 'Performing Arts',
-        price: '360'
+        price: '269'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/horror_books/anh2.png',
+        author: 'H. P. Lovecraft',
+        title: 'The Dunwich Horror',
+        categories: 'Fiction',
+        price: '128'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
+        imgUrl: 'assets/images/horror_books/anh3.png',
+        author: 'Brigid Cherry',
+        title: 'Horror',
         categories: 'Performing Arts',
-        price: '360'
+        price: '256'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/horror_books/anh4.png',
+        author: 'Massimo Rosi',
+        title: 'Vietnam horror',
+        categories: 'Comics & Graphic Novels',
+        price: '120'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/horror_books/anh5.png',
+        author: 'Darryl Jones',
+        title: 'Sleeping With the Lights On',
+        categories: 'Literary Criticism',
+        price: '208'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/horror_books/anh6.png',
+        author: 'H. P. Lovecraft',
+        title: 'Supernatural Horror in Literature',
+        categories: 'Literary Criticism',
+        price: '950'
       ),
     ];
   }
@@ -250,53 +250,53 @@ class Books {
   static List<Books> generateNovelBooks(){
     return [
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
+        imgUrl: 'assets/images/novel_books/anh1.png',
         author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        title: 'Correction',
+        categories: 'Fiction',
+        price: '288'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh2.png',
+        author: 'Keith Selby',
+        title: 'Screening The Novel',
+        categories: 'Fiction',
+        price: '214'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh3.png',
+        author: 'M. Boccardi',
+        title: 'The Contemporary British Historical Novel',
+        categories: 'Literary Criticism',
+        price: '193'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh4.png',
+        author: 'Ato Quayson',
+        title: 'The Cambridge Companion to the Postcolonial Novel',
+        categories: 'Literary Criticism',
+        price: '335'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh5.png',
+        author: 'Bill Overton',
+        title: 'The Novel of Female Adultery',
+        categories: 'Fiction',
+        price: '298'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh6.png',
+        author: 'H. Dalley',
+        title: 'The Postcolonial Historical Novel',
+        categories: 'Literary Criticism',
+        price: '226'
       ),
       Books(
-        imgUrl: 'assets/images/anime_books/anh1.jfif',
-        author: 'Fred Patten',
-        title: 'Watching Anime, Reading Manga',
-        categories: 'Performing Arts',
-        price: '360'
+        imgUrl: 'assets/images/novel_books/anh7.png',
+        author: 'T.B. Tomlinson',
+        title: 'The English Middle-Class Novel',
+        categories: 'Fiction',
+        price: '207'
       ),
     ];
   }
