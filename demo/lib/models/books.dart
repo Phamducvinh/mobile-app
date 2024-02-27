@@ -133,7 +133,7 @@ class Books {
       Books(
         imgUrl: 'assets/images/anime_books/anh5.png',
         author: 'Timothy Perper',
-        title: 'Mangatopia',
+        title: 'Mangatopia Animation',
         categories: 'Performing Arts',
         price: '275'
       ),
@@ -219,7 +219,7 @@ class Books {
       Books(
         imgUrl: 'assets/images/horror_books/anh3.png',
         author: 'Brigid Cherry',
-        title: 'Horror',
+        title: 'Horror Terrible Film',
         categories: 'Performing Arts',
         price: '256'
       ),
@@ -237,13 +237,13 @@ class Books {
         categories: 'Literary Criticism',
         price: '208'
       ),
-      Books(
-        imgUrl: 'assets/images/horror_books/anh6.png',
-        author: 'H. P. Lovecraft',
-        title: 'Supernatural Horror in Literature',
-        categories: 'Literary Criticism',
-        price: '950'
-      ),
+      // Books(
+      //   imgUrl: 'assets/images/horror_books/anh6.png',
+      //   author: 'H. P. Lovecraft',
+      //   title: 'Supernatural Horror in Literature',
+      //   categories: 'Literary Criticism',
+      //   price: '950'
+      // ),
     ];
   }
 
@@ -252,7 +252,7 @@ class Books {
       Books(
         imgUrl: 'assets/images/novel_books/anh1.png',
         author: 'Fred Patten',
-        title: 'Correction',
+        title: 'Correction Film',
         categories: 'Fiction',
         price: '288'
       ),
@@ -291,13 +291,13 @@ class Books {
         categories: 'Literary Criticism',
         price: '226'
       ),
-      Books(
-        imgUrl: 'assets/images/novel_books/anh7.png',
-        author: 'T.B. Tomlinson',
-        title: 'The English Middle-Class Novel',
-        categories: 'Fiction',
-        price: '207'
-      ),
+      // Books(
+      //   imgUrl: 'assets/images/novel_books/anh7.png',
+      //   author: 'T.B. Tomlinson',
+      //   title: 'The English Middle-Class Novel',
+      //   categories: 'Fiction',
+      //   price: '207'
+      // ),
     ];
   }
 }

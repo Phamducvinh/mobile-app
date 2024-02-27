@@ -24,9 +24,12 @@ class HorrorBooks extends StatelessWidget{
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(book.imgUrl.toString()),
+                      child: SizedBox(
+                        height: 150,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(book.imgUrl.toString(),fit: BoxFit.fill,),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10,),

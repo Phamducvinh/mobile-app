@@ -1,6 +1,4 @@
-import 'package:demo/presentation/screen/home_screen.dart';
 import 'package:demo/presentation/screen/main_screen.dart';
-import 'package:demo/presentation/widget/popular_books.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,5 +21,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-  
 }

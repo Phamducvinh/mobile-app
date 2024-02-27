@@ -43,7 +43,7 @@ class Popular_Books extends StatelessWidget {
                         children: [
                           Text(
                             book.author.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15
                             ),
                             
@@ -98,7 +98,7 @@ class Popular_Books extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 50),
+              const SizedBox(width: 50),
             ],
           );
         }).toList(),
