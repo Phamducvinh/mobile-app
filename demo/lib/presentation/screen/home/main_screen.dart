@@ -1,5 +1,5 @@
-import 'package:book_booking/presentation/screen/categories_screen.dart';
-import 'package:book_booking/presentation/screen/home_screen.dart';
+import 'package:book_booking/presentation/screen/home/categories_screen.dart';
+import 'package:book_booking/presentation/screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final screens = [
     Home_Screen(),
-    CategoriesScreen(),
+    const CategoriesScreen(),
   ];
   @override
   Widget build(BuildContext context) {

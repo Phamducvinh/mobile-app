@@ -17,7 +17,6 @@ class Home_Screen extends StatelessWidget{
     List<Books> novelBooks = Books.generateNovelBooks();
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      
       body: Column(
         children: [
           Expanded(
