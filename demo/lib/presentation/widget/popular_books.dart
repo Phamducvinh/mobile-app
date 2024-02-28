@@ -1,4 +1,4 @@
-import 'package:demo/models/books.dart';
+import 'package:book_booking/models/books.dart';
 import 'package:flutter/material.dart';
 
 class Popular_Books extends StatelessWidget {
@@ -26,7 +26,7 @@ class Popular_Books extends StatelessWidget {
                     book.imgUrl.toString(),
                     fit: BoxFit.cover,
                     width: 120,
-                    // height: 200,
+                    height: 200,
                   ),
                 ),
               ),

@@ -1,4 +1,4 @@
-import 'package:demo/presentation/screen/main_screen.dart';
+import 'package:book_booking/presentation/screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

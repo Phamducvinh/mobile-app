@@ -1,4 +1,4 @@
-import "package:demo/models/books.dart";
+import "package:book_booking/models/books.dart";
 import "package:flutter/material.dart";
 
 class HorrorBooks extends StatelessWidget{

@@ -1,10 +1,10 @@
-import 'package:demo/models/books.dart';
-import 'package:demo/presentation/widget/adventure_books.dart';
-import 'package:demo/presentation/widget/anime_books.dart';
-import 'package:demo/presentation/widget/headline.dart';
-import 'package:demo/presentation/widget/horror_books.dart';
-import 'package:demo/presentation/widget/novel_books.dart';
-import 'package:demo/presentation/widget/popular_books.dart';
+import 'package:book_booking/models/books.dart';
+import 'package:book_booking/presentation/widget/adventure_books.dart';
+import 'package:book_booking/presentation/widget/anime_books.dart';
+import 'package:book_booking/presentation/widget/headline.dart';
+import 'package:book_booking/presentation/widget/horror_books.dart';
+import 'package:book_booking/presentation/widget/novel_books.dart';
+import 'package:book_booking/presentation/widget/popular_books.dart';
 import 'package:flutter/material.dart';
 
 class Home_Screen extends StatelessWidget{
@@ -88,12 +88,17 @@ class Home_Screen extends StatelessWidget{
                                       'Most Popular',
                                       style: Theme.of(context).textTheme.headlineSmall,
                                     ),
-                                    const Text(
-                                      'See all',
-                                      style: TextStyle(
-                                        fontSize: 20
+                                    InkWell(
+                                      onTap: (){
+
+                                      },
+                                      child: const Text(
+                                        'See all',
+                                        style: TextStyle(
+                                          fontSize: 20
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 const Spacer(

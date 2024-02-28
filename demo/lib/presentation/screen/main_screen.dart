@@ -1,5 +1,5 @@
-import 'package:demo/presentation/screen/categories_screen.dart';
-import 'package:demo/presentation/screen/home_screen.dart';
+import 'package:book_booking/presentation/screen/categories_screen.dart';
+import 'package:book_booking/presentation/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
