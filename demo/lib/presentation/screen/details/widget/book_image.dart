@@ -32,7 +32,7 @@ class BookImage extends StatelessWidget{
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image(
-                  image: AssetImage(image.imgUrl.toString()),
+                  image: AssetImage(image.imgUrl!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -43,7 +43,7 @@ class BookImage extends StatelessWidget{
             left: 16,
             child: OutlinedButton.icon(
               onPressed: () {
-                // Navigator.pop(context);
+                Navigator.pop(context);
               },
               style: OutlinedButton.styleFrom(
                   side: const BorderSide(width: 1)),

@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       title: 'Book-Booking',
       home: SafeArea(
         child: Scaffold(
-          // body: MainScreen(),
-          body: DetailPage(books: popularBooks[0]),
+          body: MainScreen(),
+          // body: DetailPage(books: popularBooks[0]),
         ),
       ),
     );

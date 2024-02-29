@@ -115,7 +115,7 @@ class Home_Screen extends StatelessWidget{
                             height: height / 5,
                             //height: constraints.maxHeight * 0.38,
                             margin: const EdgeInsets.only(left: 16),
-                            child: Popular_Books(booksList: popularBooks,),
+                            child: PopularBooks(booksList: popularBooks,),
                           ),
                         ),
                       ],
