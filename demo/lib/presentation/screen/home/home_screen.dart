@@ -1,4 +1,5 @@
 import 'package:book_booking/models/books.dart';
+import 'package:book_booking/presentation/screen/home/book_list.dart';
 import 'package:book_booking/presentation/widget/adventure_books.dart';
 import 'package:book_booking/presentation/widget/anime_books.dart';
 import 'package:book_booking/presentation/widget/headline.dart';
@@ -15,6 +16,10 @@ class Home_Screen extends StatelessWidget{
     List<Books> adventureBooks = Books.generateAdventureBooks();
     List<Books> horrorBooks = Books.generateHorrorBooks();
     List<Books> novelBooks = Books.generateNovelBooks();
+
+    // Tạo biến động để lựa chọn danh sách sách
+    List<Books> selectedBooks = popularBooks;
+    
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
@@ -24,7 +29,7 @@ class Home_Screen extends StatelessWidget{
               child: Column(
                 children: [
                   SizedBox(
-                    height: height / 2,
+                    height: height / 1.8,
                     child: Stack(
                       children: [
                         Container(
@@ -48,7 +53,7 @@ class Home_Screen extends StatelessWidget{
                                 const Spacer(),
                                 Text(
                                   "Book Store",
-                                  style: Theme.of(context).textTheme.headlineLarge
+                                  style: Theme.of(context).textTheme.headline1
                                 ),
                                 const Spacer(),
                                 InkWell(
@@ -85,11 +90,14 @@ class Home_Screen extends StatelessWidget{
                                   children: [
                                     Text(
                                       'Most Popular',
-                                      style: Theme.of(context).textTheme.headlineSmall,
+                                      style: Theme.of(context).textTheme.headline2,
                                     ),
                                     InkWell(
                                       onTap: (){
-
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => BookList(name: 'Fiction', booksList: popularBooks,))
+                                        );
                                       },
                                       child: const Text(
                                         'See all',
@@ -112,7 +120,7 @@ class Home_Screen extends StatelessWidget{
                           right: 0,
                           bottom: 0,
                           child: Container(
-                            height: height / 5,
+                            height: height / 4,
                             //height: constraints.maxHeight * 0.38,
                             margin: const EdgeInsets.only(left: 16),
                             child: PopularBooks(booksList: popularBooks,),
@@ -122,7 +130,7 @@ class Home_Screen extends StatelessWidget{
                     ),
                   ),
                 
-                  Headline(category: 'Anime', showAll: 'Anime'),
+                  Headline(category: 'Anime', showAll: 'Anime', generateBooks: animeBooks,),
                   Positioned(
                     left: 0,
                     right: 0,
@@ -136,7 +144,7 @@ class Home_Screen extends StatelessWidget{
                   ),
             
             
-                  Headline(category: 'Action & Adventure', showAll: 'Action & Adventure'),
+                  Headline(category: 'Action & Adventure', showAll: 'Action & Adventure', generateBooks: adventureBooks,),
                   Positioned(
                     left: 0,
                     right: 0,
@@ -150,7 +158,7 @@ class Home_Screen extends StatelessWidget{
                   ),
             
             
-                  Headline(category: 'Horror', showAll: 'Horror'),
+                  Headline(category: 'Horror', showAll: 'Horror', generateBooks: horrorBooks,),
                   Positioned(
                     left: 0,
                     right: 0,
@@ -164,7 +172,7 @@ class Home_Screen extends StatelessWidget{
                   ),
             
             
-                  Headline(category: 'Novel', showAll: 'Novel'),
+                  Headline(category: 'Novel', showAll: 'Novel', generateBooks: novelBooks,),
                   Positioned(
                     left: 0,
                     right: 0,

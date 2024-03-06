@@ -1,3 +1,4 @@
+import "package:book_booking/presentation/screen/home/book_list.dart";
 import "package:flutter/material.dart";
 // import "package:google_nav_bar/google_nav_bar.dart";
 
@@ -10,12 +11,9 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 1,
         backgroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           "Categories",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold
-          ),
+          style: Theme.of(context).textTheme.headline1,
         ),
       ),
       body: Padding(
@@ -31,12 +29,12 @@ class CategoriesScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                // print(categoriesName[index]);
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             BookList(name: categoriesName[index])));
+                print(categoriesName[index]);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BookList(name: categoriesName[index], booksList: [],)));
               },
               child: Stack(
                 alignment: Alignment.bottomLeft,
@@ -66,10 +64,10 @@ class CategoriesScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
                       categoriesName[index],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          ?.copyWith(color: Colors.white),
                     ),
                   ),
                 ],

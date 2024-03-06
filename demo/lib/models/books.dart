@@ -300,4 +300,9 @@ class Books {
       // ),
     ];
   }
+  static List<Books> generateBooks(){
+    return [
+
+    ];
+  }
 }

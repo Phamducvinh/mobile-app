@@ -9,111 +9,107 @@ class PopularBooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView.builder(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: booksList.map((book) {
-          return GestureDetector(
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailPage(books: book),
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        final book = booksList[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailPage(books: book),
+              ),
+            );
+          },
+          child: Row(
+            children: [
+              Card(
+                elevation: 2,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              );
-            },
-            child: Row(
-              children: [
-                Card(
-                  elevation: 2,
-                  margin: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    book.imgUrl.toString(),
+                    fit: BoxFit.cover,
+                    width: 120,
+                    height: 220,
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      book.imgUrl.toString(),
-                      fit: BoxFit.cover,
-                      width: 120,
-                      height: 220,
+                ),
+              ),
+              const SizedBox(width: 10),
+              SizedBox(
+                width: 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            book.author.toString(),
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          Text(
+                            book.title.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            book.categories.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                SizedBox(
-                  width: 150,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    Expanded(
+                      flex: 0,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          fixedSize: const Size.fromWidth(100),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              book.author.toString(),
-                              style: const TextStyle(
-                                fontSize: 15
-                              ),
-                              
-                            ),
-                            Text(
-                              book.title.toString(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: const TextStyle(
+                            const Text(
+                              '\$',
+                              style: TextStyle(
+                                color: Colors.white,
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              book.categories.toString(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
+                              book.price.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ],
-                        )
-                      ),
-                      // SizedBox(height: 10,),
-                      Expanded(
-                        flex: 0,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            fixedSize: const Size.fromWidth(100),
-                          ),
-                          onPressed: (){}, 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                '\$',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18
-                                ),
-                              ),
-                              Text(
-                                book.price.toString(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18
-                                ),
-                              )
-                            ],
-                          )
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 50),
-              ],
-            ),
-          );
-        }).toList(),
-      ),
+              ),
+              const SizedBox(width: 50),
+            ],
+          ),
+        );
+      },
     );
   }
 }

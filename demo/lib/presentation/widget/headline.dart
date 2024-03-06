@@ -1,9 +1,12 @@
+import 'package:book_booking/models/books.dart';
+import 'package:book_booking/presentation/screen/home/book_list.dart';
 import 'package:flutter/material.dart';
 
 class Headline extends StatelessWidget{
   String category;
   String showAll;
-  Headline({Key? key, required this.category, required this.showAll}) : super(key: key);
+  List<Books> generateBooks;
+  Headline({Key? key, required this.category, required this.showAll, required this.generateBooks}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,18 +16,15 @@ class Headline extends StatelessWidget{
         children: [
           Text(
             category,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Colors.black
-            ),
-
+            style: Theme.of(context).textTheme.headline2,
           ),
           InkWell(
             onTap:() {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             BookList(name: showAll)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          BookList(name: showAll, booksList: generateBooks,)));
             },
             child: const Text(
               "See All",

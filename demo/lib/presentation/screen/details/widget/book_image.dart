@@ -8,12 +8,12 @@ class BookImage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 280,
+      height: 350,
       child: Stack(
         children: [
           Container(
             width: double.maxFinite,
-            height: 180,
+            height: 230,
             decoration: const BoxDecoration(
               color:Color(0xffF9CFE3),
               borderRadius: BorderRadius.only(
@@ -27,19 +27,22 @@ class BookImage extends StatelessWidget{
             right: 0,
             bottom: 0,
             child: Container(
-              height: 200,
-              alignment: Alignment.center,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image(
-                  image: AssetImage(image.imgUrl!),
-                  fit: BoxFit.cover,
+              height: 250,
+              alignment: Alignment.center,              
+              child: Card(
+                elevation: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image(
+                    image: AssetImage(image.imgUrl!),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ),
           Positioned(
-            top: 30,
+            top: 70,
             left: 16,
             child: OutlinedButton.icon(
               onPressed: () {
