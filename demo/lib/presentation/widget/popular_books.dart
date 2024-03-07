@@ -36,7 +36,7 @@ class PopularBooks extends StatelessWidget {
                   child: Image.asset(
                     book.imgUrl.toString(),
                     fit: BoxFit.cover,
-                    width: 120,
+                    width: 150,
                     height: 220,
                   ),
                 ),
@@ -54,21 +54,19 @@ class PopularBooks extends StatelessWidget {
                         children: [
                           Text(
                             book.author.toString(),
-                            style: const TextStyle(fontSize: 15),
+                            style: Theme.of(context).textTheme.headline4,
                           ),
                           Text(
                             book.title.toString(),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           Text(
                             book.categories.toString(),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
+                            style: Theme.of(context).textTheme.headline4,
                           ),
                         ],
                       ),

@@ -28,10 +28,10 @@ TextTheme textTheme = TextTheme(
   ),
 );
 
-class AppColors {
-  static Color lightBlue = const Color(0xffCFEDEF);
-  static Color black = Colors.black87;
-}
+// class AppColors {
+//   static Color lightBlue = const Color(0xffCFEDEF);
+//   static Color black = Colors.black87;
+// }
 
 List<Color> boxColors = const [
   Color(0xffCEEDEF),

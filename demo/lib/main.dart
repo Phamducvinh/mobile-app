@@ -2,6 +2,7 @@ import 'package:book_booking/app/constants/constants.dart';
 import 'package:book_booking/models/books.dart';
 import 'package:book_booking/presentation/screen/details/detail_page.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
+import 'package:book_booking/presentation/widget/drawer.dart';
 import 'package:flutter/material.dart';
 
 void main() {

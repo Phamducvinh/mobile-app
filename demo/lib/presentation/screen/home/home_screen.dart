@@ -2,13 +2,20 @@ import 'package:book_booking/models/books.dart';
 import 'package:book_booking/presentation/screen/home/book_list.dart';
 import 'package:book_booking/presentation/widget/adventure_books.dart';
 import 'package:book_booking/presentation/widget/anime_books.dart';
+import 'package:book_booking/presentation/widget/drawer.dart';
 import 'package:book_booking/presentation/widget/headline.dart';
 import 'package:book_booking/presentation/widget/horror_books.dart';
 import 'package:book_booking/presentation/widget/novel_books.dart';
 import 'package:book_booking/presentation/widget/popular_books.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home_Screen extends StatelessWidget{
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Home_Screen({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     List<Books> popularBooks = Books.generatePopularBooks();
@@ -22,6 +29,8 @@ class Home_Screen extends StatelessWidget{
     
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerWidget(),
       body: Column(
         children: [
           Expanded(
@@ -51,9 +60,35 @@ class Home_Screen extends StatelessWidget{
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Spacer(),
-                                Text(
-                                  "Book Store",
-                                  style: Theme.of(context).textTheme.headline1
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Literary Journey",
+                                      style: Theme.of(context).textTheme.headline1
+                                    ),
+                                    InkWell(
+                                      onTap: (){
+                                         _scaffoldKey.currentState?.openEndDrawer();
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(20),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 3),
+                                            )
+                                          ]
+                                        ),
+                                        child: Icon(CupertinoIcons.bars),
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 const Spacer(),
                                 InkWell(
@@ -99,11 +134,9 @@ class Home_Screen extends StatelessWidget{
                                           MaterialPageRoute(builder: (context) => BookList(name: 'Fiction', booksList: popularBooks,))
                                         );
                                       },
-                                      child: const Text(
-                                        'See all',
-                                        style: TextStyle(
-                                          fontSize: 20
-                                        ),
+                                      child: Text(
+                                        'See All',
+                                        style: Theme.of(context).textTheme.headline4,
                                       ),
                                     ),
                                   ],

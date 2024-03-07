@@ -26,12 +26,9 @@ class Headline extends StatelessWidget{
                       builder: (context) =>
                           BookList(name: showAll, booksList: generateBooks,)));
             },
-            child: const Text(
+            child: Text(
               "See All",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black
-              ),
+              style: Theme.of(context).textTheme.headline4,
             ),
           )
         ],

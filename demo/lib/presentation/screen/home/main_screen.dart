@@ -1,5 +1,6 @@
 import 'package:book_booking/presentation/screen/home/categories_screen.dart';
 import 'package:book_booking/presentation/screen/home/home_screen.dart';
+import 'package:book_booking/presentation/widget/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

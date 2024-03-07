@@ -45,8 +45,8 @@ class NovelBooks extends StatelessWidget{
                         book.title.toString(),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                          fontSize: 14
                         ),
                       ),
                       ElevatedButton(
