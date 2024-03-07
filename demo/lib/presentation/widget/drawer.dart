@@ -1,10 +1,53 @@
-import 'package:book_booking/presentation/screen/home/categories_screen.dart';
-import 'package:book_booking/presentation/screen/home/home_screen.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
 import 'package:flutter/material.dart';
 
-class DrawerWidget extends StatelessWidget{
+class DrawerWidget extends StatefulWidget{
   const DrawerWidget({super.key});
+
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  // Function to show the confirmation dialog
+  Future<void> _showLogoutConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Logout Confirmation',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          content: Text(
+            'Are you sure you want to logout?',
+            style: Theme.of(context).textTheme.headline4,  
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // // Perform logout and navigate to SignInScreen
+                // FirebaseAuth.instance.signOut().then((value) {
+                //   print("Signed Out");
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => SignInScreen()),
+                //   );
+                // });
+              },
+              child: const Text('Logout'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +80,7 @@ class DrawerWidget extends StatelessWidget{
             onTap: (){
               Navigator.push(
                 context, 
-                MaterialPageRoute(builder: (context) => MainScreen()),
+                MaterialPageRoute(builder: (context) => const MainScreen()),
               );
             },
             leading: const Icon(
@@ -93,7 +136,7 @@ class DrawerWidget extends StatelessWidget{
           ),
           ListTile(
             onTap: (){
-
+            _showLogoutConfirmationDialog();
             },
             leading: const Icon(
               Icons.exit_to_app,
@@ -108,5 +151,4 @@ class DrawerWidget extends StatelessWidget{
       ),
     );
   }
-
 }
