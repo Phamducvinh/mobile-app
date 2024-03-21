@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class Headline extends StatelessWidget{
   String category;
   String showAll;
-  List<Books> generateBooks;
-  Headline({Key? key, required this.category, required this.showAll, required this.generateBooks}) : super(key: key);
+  Headline({Key? key, required this.category, required this.showAll}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +23,7 @@ class Headline extends StatelessWidget{
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          BookList(name: showAll, booksList: generateBooks,)));
+                          BookList(name: showAll)));
             },
             child: Text(
               "See All",

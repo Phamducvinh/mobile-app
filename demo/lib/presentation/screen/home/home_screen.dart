@@ -1,3 +1,4 @@
+import 'package:book_booking/app/constants/constants.dart';
 import 'package:book_booking/models/books.dart';
 import 'package:book_booking/presentation/screen/home/book_list.dart';
 import 'package:book_booking/presentation/widget/adventure_books.dart';
@@ -10,218 +11,194 @@ import 'package:book_booking/presentation/widget/popular_books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Home_Screen extends StatelessWidget{
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+final TextEditingController searchController = TextEditingController();
+
+class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  Home_Screen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
-    List<Books> popularBooks = Books.generatePopularBooks();
-    List<Books> animeBooks = Books.generateAnimeBooks();
-    List<Books> adventureBooks = Books.generateAdventureBooks();
-    List<Books> horrorBooks = Books.generateHorrorBooks();
-    List<Books> novelBooks = Books.generateNovelBooks();
-
-    // Tạo biến động để lựa chọn danh sách sách
-    List<Books> selectedBooks = popularBooks;
-    
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Colors.white,
       endDrawer: DrawerWidget(),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
+      body: SingleChildScrollView(
+        //physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              height: height / 2,
+              child: Stack(
                 children: [
-                  SizedBox(
-                    height: height / 1.8,
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: height / 2.4,
-                          //height: constraints.maxHeight * 0.8,
-                          //width: width,
-                          //margin: const EdgeInsets.only(left: 16),
-                          decoration: const BoxDecoration(
-                            // color: Color.fromARGB(255, 9, 203, 164),
-                            color: Color.fromRGBO(182, 239, 243, 1),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(45),
-                              bottomRight: Radius.circular(45),
-                            ),
-                          ),
-                          child: SafeArea(
-                            minimum: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Spacer(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Literary Journey",
-                                      style: Theme.of(context).textTheme.headline1
-                                    ),
-                                    InkWell(
-                                      onTap: (){
-                                         _scaffoldKey.currentState?.openEndDrawer();
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(20),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 10,
-                                              offset: const Offset(0, 3),
-                                            )
-                                          ]
-                                        ),
-                                        child: Icon(CupertinoIcons.bars),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    // showSearch(
-                                    //     context: context,
-                                    //     delegate: CustomSearchDelegate());
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    height: 50,
-                                    width: double.maxFinite,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                          width: 1, 
-                                          color: Colors.black),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Search for Books"),
-                                        Icon(Icons.search),
-                                      ],
-                                    ),
+                  Container(
+                    height: height / 2.5,
+                    //height: constraints.maxHeight * 0.8,
+                    //width: width,
+                    //margin: const EdgeInsets.only(left: 16),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightBlue,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(45),
+                        bottomRight: Radius.circular(45),
+                      ),
+                    ),
+                    child: SafeArea(
+                      minimum: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Literary Journey",
+                                style: Theme.of(context).textTheme.headline1
+                              ),
+                              InkWell(
+                                onTap: (){
+                                    _scaffoldKey.currentState?.openEndDrawer();
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 3),
+                                      )
+                                    ]
                                   ),
+                                  child: Icon(CupertinoIcons.bars),
                                 ),
-                                const Spacer(
-                                  flex: 2,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Most Popular',
-                                      style: Theme.of(context).textTheme.headline2,
-                                    ),
-                                    InkWell(
-                                      onTap: (){
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => BookList(name: 'Fiction', booksList: popularBooks,))
-                                        );
-                                      },
-                                      child: Text(
-                                        'See All',
-                                        style: Theme.of(context).textTheme.headline4,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(
-                                  flex: 5,
-                                ),
-                              ],
+                              )
+                            ],
+                          ),
+                          const Spacer(),
+                          InkWell(
+                            onTap: () {
+                              // showSearch(
+                              //     context: context,
+                              //     delegate: CustomSearchDelegate());
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              height: 50,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                    width: 1, color: AppColors.black),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Search for Books"),
+                                  Icon(Icons.search),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            height: height / 4,
-                            //height: constraints.maxHeight * 0.38,
-                            margin: const EdgeInsets.only(left: 16),
-                            child: PopularBooks(booksList: popularBooks,),
+                          const Spacer(
+                            flex: 2,
                           ),
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Most Popular',
+                                  style: Theme.of(context).textTheme.headline2),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              BookList(name: "Fiction")));
+                                },
+                                child: Text(
+                                  "See All",
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                              )
+                            ],
+                          ),
+                          const Spacer(
+                            flex: 5,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                
-                  Headline(category: 'Anime', showAll: 'Anime', generateBooks: animeBooks,),
                   Positioned(
                     left: 0,
                     right: 0,
                     bottom: 0,
                     child: Container(
-                      // height: height / 5,
+                      height: height / 4.2,
                       //height: constraints.maxHeight * 0.38,
-                      margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
-                      child: AnimeBooks(booksList: animeBooks),
-                    ),
-                  ),
-            
-            
-                  Headline(category: 'Action & Adventure', showAll: 'Action & Adventure', generateBooks: adventureBooks,),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      // height: height / 5,
-                      //height: constraints.maxHeight * 0.38,
-                      margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
-                      child: AdventureBooks(booksList: adventureBooks),
-                    ),
-                  ),
-            
-            
-                  Headline(category: 'Horror', showAll: 'Horror', generateBooks: horrorBooks,),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      // height: height / 5,
-                      //height: constraints.maxHeight * 0.38,
-                      margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
-                      child: HorrorBooks(booksList: horrorBooks),
-                    ),
-                  ),
-            
-            
-                  Headline(category: 'Novel', showAll: 'Novel', generateBooks: novelBooks,),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      // height: height / 5,
-                      //height: constraints.maxHeight * 0.38,
-                      margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
-                      child: NovelBooks(booksList: novelBooks),
+                      margin: const EdgeInsets.only(left: 16),
+                      child: const PopularBooks(),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Headline(
+              category: "Anime",
+              showAll: "Anime",
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              //color: Colors.grey.shade100,
+              height: height / 3.4,
+              child: const AnimeBooks(),
+            ),
+            Headline(
+              category: "Action & Adventure",
+              showAll: "Action & Adventure",
+            ),
+            Container(
+              //color: Colors.yellow,
+              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              height: height / 3.4,
+              child: const AdventureBooks(),
+            ),
+            Headline(
+              category: "Novel",
+              showAll: "Novel",
+            ),
+            Container(
+              //color: Colors.yellow,
+              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              height: height / 3.4,
+              child: const NovelBooks(),
+            ),
+            Headline(
+              category: "Horror",
+              showAll: "Horror",
+            ),
+            Container(
+              //color: Colors.yellow,
+              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              height: height / 3.4,
+              child: const HorrorBooks(),
+            ),
+          ],
+        ),
       ),
     );
   }

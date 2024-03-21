@@ -34,7 +34,7 @@ class CategoriesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            BookList(name: categoriesName[index], booksList: [],)));
+                            BookList(name: categoriesName[index])));
               },
               child: Stack(
                 alignment: Alignment.bottomLeft,
