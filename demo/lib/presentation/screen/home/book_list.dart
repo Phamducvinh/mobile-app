@@ -93,7 +93,7 @@ class BookList extends StatelessWidget{
                                         borderRadius:
                                             BorderRadius.circular(12)),
                                     child: Card(
-                                      elevation: 2,
+                                      elevation: 10,
                                       margin: EdgeInsets.zero,
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(12)

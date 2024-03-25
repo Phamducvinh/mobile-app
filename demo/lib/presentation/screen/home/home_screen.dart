@@ -26,11 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      endDrawer: DrawerWidget(),
+      endDrawer: const DrawerWidget(),
       body: SingleChildScrollView(
         //physics: const BouncingScrollPhysics(),
         child: Column(
@@ -162,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
               showAll: "Anime",
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               //color: Colors.grey.shade100,
               height: height / 3.4,
               child: const AnimeBooks(),
@@ -173,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               //color: Colors.yellow,
-              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               height: height / 3.4,
               child: const AdventureBooks(),
             ),
@@ -183,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               //color: Colors.yellow,
-              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               height: height / 3.4,
               child: const NovelBooks(),
             ),
@@ -193,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               //color: Colors.yellow,
-              margin: const EdgeInsets.fromLTRB(16, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               height: height / 3.4,
               child: const HorrorBooks(),
             ),

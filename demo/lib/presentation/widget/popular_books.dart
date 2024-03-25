@@ -20,6 +20,7 @@ class PopularBooks extends StatelessWidget {
         }
         if(snapshot.hasData){
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: 10,
             itemBuilder: (context, index) {
@@ -35,7 +36,7 @@ class PopularBooks extends StatelessWidget {
                 child: Row(
                   children: [
                     Card(
-                      elevation: 2,
+                      elevation: 10,
                       margin: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),

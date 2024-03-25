@@ -45,7 +45,7 @@ class NovelBooks extends StatelessWidget{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Card(
-                            elevation: 2,
+                            elevation: 10,
                             margin: EdgeInsets.zero,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)

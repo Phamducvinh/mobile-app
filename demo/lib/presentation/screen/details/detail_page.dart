@@ -66,7 +66,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       height: 250,
                                       alignment: Alignment.center,              
                                       child: Card(
-                                        elevation: 2,
+                                        elevation: 10,
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(12),
                                           child: Image(
@@ -315,6 +315,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         .headline5
                                         ?.copyWith(fontSize: 14),
                                     trimExpandedText: ' Less',
+                                    textAlign: TextAlign.justify,
                                   ),
                                   const SizedBox(height: 10),
                                   ElevatedButton(
