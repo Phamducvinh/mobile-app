@@ -332,7 +332,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      primary: AppColors.black,
+                                      backgroundColor: AppColors.black,
                                     ),
                                     child: Text(
                                       "Buy",
