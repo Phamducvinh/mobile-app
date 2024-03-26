@@ -3,10 +3,18 @@ import 'package:book_booking/app/notifier/app_notifier.dart';
 import 'package:book_booking/models/books.dart';
 import 'package:book_booking/presentation/screen/details/detail_page.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
+import 'package:book_booking/presentation/screen/login_screen/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -26,9 +34,9 @@ class MyApp extends StatelessWidget {
         title: 'Book-Booking',
         home: const SafeArea(
           child: Scaffold(
-            body: MainScreen(),
+            //body: MainScreen(),
             // body: DetailPage(books: popularBooks[0]),
-            // body: SignInScreen()
+            body: LoginScreen(),
           ),
         ),
       ),

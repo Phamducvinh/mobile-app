@@ -42,6 +42,10 @@ dependencies:
   firebase_core: ^2.25.5
   url_launcher: ^6.1.5
   readmore: ^2.2.0
+  animate_do: ^3.3.4
+  cloud_firestore: ^4.15.9
+  firebase_storage: ^11.6.10
+  
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +80,8 @@ flutter:
     - assets/images/horror_books/
     - assets/images/novel_books/
     - assets/images/categories/
+    - assets/images/login_screen/
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

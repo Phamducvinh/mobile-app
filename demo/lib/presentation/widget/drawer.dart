@@ -1,16 +1,32 @@
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
+import 'package:book_booking/presentation/screen/login_screen/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Thêm import cho Firestore
+import 'package:book_booking/presentation/screen/login_screen/profile_screen.dart'; // Thêm import cho ProfileScreen
 
 class DrawerWidget extends StatefulWidget{
-  const DrawerWidget({super.key});
+  const DrawerWidget({Key? key});
 
   @override
   State<DrawerWidget> createState() => _DrawerWidgetState();
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  // Function to show the confirmation dialog
-  Future<void> _showLogoutConfirmationDialog() async {
+  late User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
+
+  Future<void> _getUserData() async {
+    // Lấy thông tin người dùng hiện tại
+    _user = FirebaseAuth.instance.currentUser;
+  }
+
+  Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -32,14 +48,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             TextButton(
               onPressed: () {
-                // // Perform logout and navigate to SignInScreen
-                // FirebaseAuth.instance.signOut().then((value) {
-                //   print("Signed Out");
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => SignInScreen()),
-                //   );
-                // });
+                FirebaseAuth.instance.signOut().then((value) {
+                  print("Signed Out");
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    (Route<dynamic> route) => false, // Remove all routes from stack
+                  );
+                }).catchError((error) {
+                  print("Error during signout: $error");
+                });
               },
               child: const Text('Logout'),
             ),
@@ -60,14 +78,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(182, 239, 243, 1),
               ),
-              accountName: Text(
-                'Viet Nguyen Duc', 
-                style: Theme.of(context).textTheme.headline2,
-              ), 
-              accountEmail: Text(
-                'viet2k3nguyen@gmail.com',
-                style: Theme.of(context).textTheme.headline4,
-              ),
+              accountName: _user != null ? Text(_user!.displayName ?? "") : null,
+              accountEmail: _user != null ? Text(_user!.email ?? "") : null,
               currentAccountPicture: Container(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: const CircleAvatar(
@@ -94,10 +106,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ),
           ListTile(
             onTap: (){
-              // Navigator.push(
-              //   context, 
-              //   MaterialPageRoute(builder: (context) => CategoriesScreen()),
-              // );
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const ProfileScreen()), // Chuyển hướng đến ProfileScreen để hiển thị thông tin người dùng
+              );
             },
             leading: const Icon(
               Icons.person,
@@ -122,31 +134,19 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
           ),
           ListTile(
-            onTap: (){
+  onTap: () {
+    _showLogoutConfirmationDialog(context); // Hiển thị hộp thoại xác nhận đăng xuất
+  },
+  leading: const Icon(
+    Icons.exit_to_app,
+    color: Colors.black,
+  ),
+  title: Text(
+    'Log out',
+    style: Theme.of(context).textTheme.headline2,
+  ),
+),
 
-            },
-            leading: const Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Settings',
-            style: Theme.of(context).textTheme.headline2,
-            ),
-          ),
-          ListTile(
-            onTap: (){
-            _showLogoutConfirmationDialog();
-            },
-            leading: const Icon(
-              Icons.exit_to_app,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Log out',
-            style: Theme.of(context).textTheme.headline2,
-            ),
-          ),
         ],
       ),
     );

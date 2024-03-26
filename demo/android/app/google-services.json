@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223177952676",
+    "project_id": "login-btl-e2aad",
+    "storage_bucket": "login-btl-e2aad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223177952676:android:57124feecb9dafa12c8531",
+        "android_client_info": {
+          "package_name": "com.example.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-2QF0-xia46_78Huj0MrbURfgEgdp5C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
