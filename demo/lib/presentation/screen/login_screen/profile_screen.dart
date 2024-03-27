@@ -71,20 +71,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Name: $_userName',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      // const SizedBox(height: 20),
-                      Text(
-                        'Email: $_userEmail',
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name: $_userName',
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        // const SizedBox(height: 20),
+                        Text(
+                          'Email: $_userEmail',
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -111,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void showEditProfile(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(200, 0, 0, 0),
         isScrollControlled: true,
         useRootNavigator: true,
         context: context,

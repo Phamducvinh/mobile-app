@@ -1,6 +1,7 @@
 import 'package:book_booking/app/constants/constants.dart';
 import 'package:book_booking/models/books.dart';
 import 'package:book_booking/presentation/screen/home/book_list.dart';
+import 'package:book_booking/presentation/screen/home/search_screen.dart';
 import 'package:book_booking/presentation/widget/adventure_books.dart';
 import 'package:book_booking/presentation/widget/anime_books.dart';
 import 'package:book_booking/presentation/widget/drawer.dart';
@@ -89,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Spacer(),
                           InkWell(
                             onTap: () {
-                              // showSearch(
-                              //     context: context,
-                              //     delegate: CustomSearchDelegate());
+                              showSearch(
+                                  context: context,
+                                  delegate: CustomSearchDelegate());
                             },
                             child: Container(
                               padding: const EdgeInsets.all(12),
