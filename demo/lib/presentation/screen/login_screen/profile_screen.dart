@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .get();
 
       setState(() {
-        // _userName = userData['name'];
+        //_userName = userData['username'];
         _userEmail = _user!.email!;
       });
     }

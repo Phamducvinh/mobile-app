@@ -13,7 +13,6 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  late final ImageProvider? _image;
   late User? _user;
 
   @override
@@ -25,11 +24,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   Future<void> _getUserData() async {
     // Lấy thông tin người dùng hiện tại
     _user = FirebaseAuth.instance.currentUser;
+    setState(() {}); // Cập nhật giao diện người dùng sau khi lấy thông tin người dùng
   }
 
-  // Future<void> _getImage() async{
-  //   _image = ProfileScreen.
-  // }
   Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,

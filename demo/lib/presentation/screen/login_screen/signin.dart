@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_booking/presentation/screen/login_screen/signup.dart';
 import 'package:book_booking/presentation/widget/form_container_widget.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key});
@@ -15,6 +18,32 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  void _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.pushNamed(context, "/home");
+      }
+    } catch (e) {
+      //Fluttertoast.showToast(msg: "Đã xảy ra lỗi: $e"); // Hiển thị thông báo lỗi
+      print("Error signing in with Google: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +178,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 70),
+                      const SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: Image.asset(
+                                  "assets/images/login_screen/google_icon.webp"), // Thay đổi đường dẫn hình ảnh tùy theo vị trí của tệp ảnh Google
+                              onPressed: _signInWithGoogle,
+                            ),
+                          ),
+                          SizedBox(width: 55),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: Image.asset(
+                                  "assets/images/login_screen/facebook_icon.png"), // Thay đổi đường dẫn hình ảnh tùy theo vị trí của tệp ảnh Facebook
+                              onPressed: () {
+                                // Xử lý sự kiện khi nhấn nút Facebook
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 20,
                       ),

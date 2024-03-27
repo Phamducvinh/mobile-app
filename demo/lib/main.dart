@@ -39,6 +39,9 @@ class MyApp extends StatelessWidget {
             body: LoginScreen(),
           ),
         ),
+        routes: {
+        '/home': (context) => MainScreen(), // Đăng ký màn hình MainScreen với đường dẫn '/home'
+      },
       ),
     );
   }

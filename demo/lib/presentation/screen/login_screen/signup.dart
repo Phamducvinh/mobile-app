@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_booking/presentation/widget/form_container_widget.dart';
 import 'package:book_booking/presentation/screen/login_screen/signin.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
@@ -10,8 +11,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _userNameTextController =
-        TextEditingController(); // Thêm controller cho User name
+    TextEditingController _userNameTextController = TextEditingController();
     TextEditingController _passwordTextController = TextEditingController();
     TextEditingController _emailTextController = TextEditingController();
 
@@ -23,10 +23,10 @@ class SignUpScreen extends StatelessWidget {
               Container(
                 height: 400,
                 decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/login_screen/background.png'),
-                        fit: BoxFit.fill)),
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/login_screen/background.png'),
+                    fit: BoxFit.fill)),
                 child: Stack(
                   children: <Widget>[
                     Positioned(
@@ -34,26 +34,26 @@ class SignUpScreen extends StatelessWidget {
                       width: 80,
                       height: 200,
                       child: FadeInUp(
-                          duration: const Duration(seconds: 1),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/login_screen/light-1.png'))),
-                          )),
+                        duration: const Duration(seconds: 1),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/login_screen/light-1.png'))),
+                        )),
                     ),
                     Positioned(
                       left: 140,
                       width: 80,
                       height: 150,
                       child: FadeInUp(
-                          duration: const Duration(milliseconds: 1200),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/login_screen/light-2.png'))),
-                          )),
+                        duration: const Duration(milliseconds: 1200),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/login_screen/light-2.png'))),
+                        )),
                     ),
                     Positioned(
                       right: 40,
@@ -61,29 +61,29 @@ class SignUpScreen extends StatelessWidget {
                       width: 80,
                       height: 150,
                       child: FadeInUp(
-                          duration: const Duration(milliseconds: 1300),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/login_screen/clock.png'))),
-                          )),
+                        duration: const Duration(milliseconds: 1300),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/login_screen/clock.png'))),
+                        )),
                     ),
                     Positioned(
                       child: FadeInUp(
-                          duration: const Duration(milliseconds: 1600),
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 50),
-                            child: const Center(
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                        duration: const Duration(milliseconds: 1600),
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 50),
+                          child: const Center(
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold),
                             ),
-                          )),
+                          ),
+                        )),
                     )
                   ],
                 ),
@@ -100,8 +100,7 @@ class SignUpScreen extends StatelessWidget {
                       FormContainerWidget(
                         hintText: "User name",
                         isPasswordField: false,
-                        controller:
-                            _userNameTextController, // Truyền controller vào FormContainerWidget
+                        controller: _userNameTextController, 
                       ),
                       const SizedBox(
                         height: 10,
@@ -121,20 +120,37 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 45),
                       TextButton(
-                        onPressed: () {
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: _emailTextController.text,
-                                  password: _passwordTextController.text)
-                              .then((value) {
-                            print("Created New Account");
-                            Navigator.push(
+                        onPressed: () async {
+                          try {
+                            // Tạo tài khoản người dùng mới bằng email và mật khẩu
+                            UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text,
+                            );
+
+                            // Nếu tạo tài khoản thành công, lưu thông tin người dùng vào Firestore
+                            if (userCredential.user != null) {
+                              UserModel newUser = UserModel(
+                                _userNameTextController.text,
+                                _emailTextController.text,
+                                _passwordTextController.text,
+                              );
+                              await newUser.saveToFirestore();
+
+                              // Chuyển hướng người dùng đến màn hình chính sau khi đăng ký thành công
+                              Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainScreen()));
-                          }).onError((error, stackTrace) {
-                            print("Error ${error.toString()}");
-                          });
+                                MaterialPageRoute(builder: (context) => const MainScreen()),
+                              );
+                            }
+                          } catch (error) {
+                            print("Error: $error");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Error: $error'),
+                              ),
+                            );
+                          }
                         },
                         child: Container(
                           height: 50,
@@ -190,5 +206,39 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class UserModel {
+  final String? username;
+  final String? email;
+  final String? password;
+
+  UserModel(this.username, this.email, this.password);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'username': username,
+      'email': email,
+      'password': password,
+    };
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      map['username'],
+      map['email'],
+      map['password'],
+    );
+  }
+
+  Future<void> saveToFirestore() async {
+    try {
+      final CollectionReference users = FirebaseFirestore.instance.collection('users');
+      final Map<String, dynamic> userData = toMap();
+      await users.add(userData);
+    } catch (error) {
+      throw error;
+    }
   }
 }
