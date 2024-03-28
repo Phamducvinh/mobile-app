@@ -15,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String? _imageUrl;
   late User? _user;
   late String _userName = "";
   late String _userEmail = "";
@@ -31,21 +32,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getUserData() async {
-    // Lấy thông tin người dùng hiện tại
     _user = FirebaseAuth.instance.currentUser;
-
     if (_user != null) {
-      // Lấy dữ liệu người dùng từ Firestore
-      DocumentSnapshot<Map<String, dynamic>> userData = await FirebaseFirestore
-          .instance
-          .collection('users')
-          .doc(_user!.uid)
-          .get();
+      if (_user!.providerData[0].providerId == "password") {
+        // Đăng nhập bằng email và password
+        QuerySnapshot userData = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: _user!.email)
+            .get();
 
-      setState(() {
-        //_userName = userData['username'];
-        _userEmail = _user!.email!;
-      });
+        if (userData.docs.isNotEmpty) {
+          setState(() {
+            _userName = userData.docs.first['username'];
+            _userEmail = _user!.email ?? "";
+            _imageUrl = _user!.photoURL;
+          });
+        }
+      } else if (_user!.providerData[0].providerId == "google.com") {
+        // Đăng nhập bằng Google
+        setState(() {
+          _userName = _user!.displayName ?? "";
+          _userEmail = _user!.email ?? "";
+          _imageUrl = _user!.photoURL;
+        });
+      }
     }
   }
 
@@ -80,9 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 backgroundImage: MemoryImage(_image!))
                             : const CircleAvatar(
                                 radius: 40,
-                                backgroundImage: AssetImage(
-                                    'assets/images/categories/anh6.png'),
-                              ),
+                                backgroundImage: NetworkImage(
+                                    'https://img.freepik.com/free-vector/funny-error-404-background-design_1167-219.jpg?w=740&t=st=1658904599~exp=1658905199~hmac=131d690585e96267bbc45ca0978a85a2f256c7354ce0f18461cd030c5968011c')),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: Container(
@@ -118,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           showEditProfile(context);
                         },
                         child: const Text(
-                          'Chỉnh sửa',
+                          'Edit Profile',
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.white,
@@ -143,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 8,
                     ),
                     Text(
-                      'Lịch sử đọc sách',
+                      'Reading History',
                       style: Theme.of(context)
                           .textTheme
                           .headline2
@@ -168,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 8,
                     ),
                     Text(
-                      'Cài đặt',
+                      'Setting',
                       style: Theme.of(context)
                           .textTheme
                           .headline2

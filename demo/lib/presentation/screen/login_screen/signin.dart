@@ -21,6 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  String? _name;
+  String? get name => _name;
+
+  String? _email;
+  String? get email => _email;
+
+  String? _imageUrl;
+  String? get imageUrl => _imageUrl;
 
   void _signInWithGoogle() async {
     try {
@@ -36,12 +44,27 @@ class _LoginScreenState extends State<LoginScreen> {
           accessToken: googleSignInAuthentication.accessToken,
         );
 
-        await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/home");
+        // Đăng nhập vào Firebase
+        final UserCredential userCredential =
+            await _firebaseAuth.signInWithCredential(credential);
+        final User userDetails = userCredential.user!;
+
+        // Lưu thông tin người dùng
+        setState(() {
+          _name = userDetails.displayName;
+          _email = userDetails.email;
+          _imageUrl = userDetails.photoURL;
+        });
+
+        // Chuyển hướng đến màn hình chính
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+        );
       }
     } catch (e) {
-      //Fluttertoast.showToast(msg: "Đã xảy ra lỗi: $e"); // Hiển thị thông báo lỗi
       print("Error signing in with Google: $e");
+      // Xử lý các trường hợp lỗi
     }
   }
 
@@ -144,20 +167,81 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 45),
                       TextButton(
-                        onPressed: () {
-                          FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: _emailTextController.text,
-                                  password: _passwordTextController.text)
-                              .then((value) {
+                        onPressed: () async {
+                          // Kiểm tra xem liệu cả hai trường email và password có được điền vào không
+                          if (_emailTextController.text.isEmpty ||
+                              _passwordTextController.text.isEmpty) {
+                            // Hiển thị thông báo lỗi nếu một trong hai trường email hoặc password không được điền vào
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Lỗi đăng nhập'),
+                                  content: Text(
+                                      'Vui lòng điền vào cả email và mật khẩu.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            return; // Thoát khỏi hàm onPressed
+                          }
+
+                          // Tiếp tục với quá trình đăng nhập nếu cả hai trường email và password được điền vào
+                          try {
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .signInWithEmailAndPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text,
+                            );
+                            // Đăng nhập thành công
+                            // Chuyển hướng đến Màn hình chính (MainScreen)
                             Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SplashLogin()));
-                          }).catchError((error) {
-                            print("Error ${error.toString()}");
-                            // Handle error here, e.g., show an error message to the user
-                          });
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SplashLogin()),
+                            );
+                          } catch (e) {
+                            // Xử lý lỗi đăng nhập
+                            print('Lỗi khi đăng nhập: $e');
+                            String errorMessage = 'Đã xảy ra lỗi';
+                            if (e is FirebaseAuthException) {
+                              if (e.code == 'user-not-found') {
+                                errorMessage =
+                                    'Không tìm thấy người dùng với email này';
+                              } else if (e.code == 'wrong-password') {
+                                errorMessage = 'Mật khẩu không đúng';
+                              } else if (e.code == 'invalid-email') {
+                                errorMessage = 'Địa chỉ email không hợp lệ';
+                              }
+                            }
+
+                            // Hiển thị thông báo lỗi
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Lỗi đăng nhập'),
+                                  content: Text(errorMessage),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         child: Container(
                           height: 50,

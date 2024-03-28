@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:book_booking/presentation/screen/login_screen/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,24 @@ class SignUpScreen extends StatelessWidget {
     TextEditingController _passwordTextController = TextEditingController();
     TextEditingController _emailTextController = TextEditingController();
 
+    // Hàm kiểm tra tính hợp lệ của mật khẩu
+    bool isPasswordValid(String password) {
+      return password.length >= 8 && // Độ dài tối thiểu là 8 ký tự
+          password.contains(
+              RegExp(r'[A-Z]')) && // Chứa ít nhất một chữ cái viết hoa
+          password.contains(
+              RegExp(r'[a-z]')) && // Chứa ít nhất một chữ cái viết thường
+          password.contains(RegExp(r'[0-9]')); // Chứa ít nhất một số
+    }
+
+    // Hàm kiểm tra tính hợp lệ của email
+    bool isEmailValid(String email) {
+      return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+              .hasMatch(email) && // Kiểm tra định dạng email chung
+          email
+              .endsWith('@gmail.com'); // Kiểm tra có kết thúc bằng '@gmail.com'
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -23,10 +42,10 @@ class SignUpScreen extends StatelessWidget {
               Container(
                 height: 400,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/login_screen/background.png'),
-                    fit: BoxFit.fill)),
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/login_screen/background.png'),
+                        fit: BoxFit.fill)),
                 child: Stack(
                   children: <Widget>[
                     Positioned(
@@ -34,26 +53,26 @@ class SignUpScreen extends StatelessWidget {
                       width: 80,
                       height: 200,
                       child: FadeInUp(
-                        duration: const Duration(seconds: 1),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/login_screen/light-1.png'))),
-                        )),
+                          duration: const Duration(seconds: 1),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/login_screen/light-1.png'))),
+                          )),
                     ),
                     Positioned(
                       left: 140,
                       width: 80,
                       height: 150,
                       child: FadeInUp(
-                        duration: const Duration(milliseconds: 1200),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/login_screen/light-2.png'))),
-                        )),
+                          duration: const Duration(milliseconds: 1200),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/login_screen/light-2.png'))),
+                          )),
                     ),
                     Positioned(
                       right: 40,
@@ -61,29 +80,29 @@ class SignUpScreen extends StatelessWidget {
                       width: 80,
                       height: 150,
                       child: FadeInUp(
-                        duration: const Duration(milliseconds: 1300),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/login_screen/clock.png'))),
-                        )),
+                          duration: const Duration(milliseconds: 1300),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/login_screen/clock.png'))),
+                          )),
                     ),
                     Positioned(
                       child: FadeInUp(
-                        duration: const Duration(milliseconds: 1600),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 50),
-                          child: const Center(
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold),
+                          duration: const Duration(milliseconds: 1600),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 50),
+                            child: const Center(
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
-                        )),
+                          )),
                     )
                   ],
                 ),
@@ -100,7 +119,7 @@ class SignUpScreen extends StatelessWidget {
                       FormContainerWidget(
                         hintText: "User name",
                         isPasswordField: false,
-                        controller: _userNameTextController, 
+                        controller: _userNameTextController,
                       ),
                       const SizedBox(
                         height: 10,
@@ -122,8 +141,21 @@ class SignUpScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () async {
                           try {
+                            // Kiểm tra tính hợp lệ của email
+                            if (!isEmailValid(_emailTextController.text)) {
+                              throw "Invalid email format";
+                            }
+
+                            // Kiểm tra tính hợp lệ của mật khẩu
+                            if (!isPasswordValid(
+                                _passwordTextController.text)) {
+                              throw "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit";
+                            }
+
                             // Tạo tài khoản người dùng mới bằng email và mật khẩu
-                            UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .createUserWithEmailAndPassword(
                               email: _emailTextController.text,
                               password: _passwordTextController.text,
                             );
@@ -140,7 +172,8 @@ class SignUpScreen extends StatelessWidget {
                               // Chuyển hướng người dùng đến màn hình chính sau khi đăng ký thành công
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const MainScreen()),
+                                MaterialPageRoute(
+                                    builder: (context) => const SplashLogin()),
                               );
                             }
                           } catch (error) {
@@ -234,7 +267,8 @@ class UserModel {
 
   Future<void> saveToFirestore() async {
     try {
-      final CollectionReference users = FirebaseFirestore.instance.collection('users');
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
       final Map<String, dynamic> userData = toMap();
       await users.add(userData);
     } catch (error) {

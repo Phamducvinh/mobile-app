@@ -1,9 +1,9 @@
-import 'package:book_booking/presentation/screen/home/main_screen.dart';
-import 'package:book_booking/presentation/screen/login_screen/profile_screen.dart';
-import 'package:book_booking/presentation/screen/login_screen/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Thêm import cho Firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:book_booking/presentation/screen/home/main_screen.dart';
+import 'package:book_booking/presentation/screen/login_screen/signin.dart';
+import 'package:book_booking/presentation/screen/login_screen/profile_screen.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key});
@@ -13,7 +13,12 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  String errorLink =
+      "https://img.freepik.com/free-vector/funny-error-404-background-design_1167-219.jpg?w=740&t=st=1658904599~exp=1658905199~hmac=131d690585e96267bbc45ca0978a85a2f256c7354ce0f18461cd030c5968011c";
   late User? _user;
+  String? _name;
+  String? _email;
+  String? _imageUrl;
 
   @override
   void initState() {
@@ -22,9 +27,32 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   }
 
   Future<void> _getUserData() async {
-    // Lấy thông tin người dùng hiện tại
-    _user = FirebaseAuth.instance.currentUser;
-    setState(() {}); // Cập nhật giao diện người dùng sau khi lấy thông tin người dùng
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      String? email = currentUser.email;
+      String? displayName = currentUser.displayName;
+
+      if (email != null && displayName != null) {
+        setState(() {
+          _name = displayName;
+          _email = email;
+          _imageUrl = currentUser.photoURL;
+        });
+      } else {
+        final QuerySnapshot userData = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: currentUser.email)
+            .get();
+
+        if (userData.docs.isNotEmpty) {
+          setState(() {
+            _name = userData.docs.first['username'];
+            _email = currentUser.email;
+            _imageUrl = currentUser.photoURL;
+          });
+        }
+      }
+    }
   }
 
   Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
@@ -34,11 +62,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         return AlertDialog(
           title: Text(
             'Logout Confirmation',
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.headline6,
           ),
           content: Text(
             'Are you sure you want to logout?',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
           actions: <Widget>[
             TextButton(
@@ -51,11 +79,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               onPressed: () {
                 FirebaseAuth.instance.signOut().then((value) {
                   print("Signed Out");
+                  setState(() {
+                    _name = null;
+                    _email = null;
+                    _imageUrl = null;
+                  });
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
-                    (Route<dynamic> route) =>
-                        false, // Remove all routes from stack
+                    (Route<dynamic> route) => false,
                   );
                 }).catchError((error) {
                   print("Error during signout: $error");
@@ -80,19 +112,25 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(182, 239, 243, 1),
               ),
-              accountName:
-                  _user != null ? Text(_user!.displayName ?? "") : null,
-              accountEmail: _user != null
-                  ? Text(
-                      _user!.email ?? "",
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    )
-                  : null,
-              currentAccountPicture: Container(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: const CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/images/categories/anh6.png')),
+              accountName: Text(
+                _name ?? "",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    ?.copyWith(fontSize: 18),
+              ),
+              accountEmail: Text(
+                _email ?? "",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    ?.copyWith(fontSize: 18),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: _imageUrl != null
+                    ? NetworkImage(_imageUrl!)
+                    : NetworkImage(errorLink),
+                // AssetImage('assets/images/categories/anh6.png'),
               ),
             ),
           ),
@@ -116,9 +154,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const ProfileScreen()), // Chuyển hướng đến ProfileScreen để hiển thị thông tin người dùng
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
             },
             leading: const Icon(
@@ -143,8 +179,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
-              _showLogoutConfirmationDialog(
-                  context); // Hiển thị hộp thoại xác nhận đăng xuất
+              _showLogoutConfirmationDialog(context);
             },
             leading: const Icon(
               Icons.exit_to_app,
