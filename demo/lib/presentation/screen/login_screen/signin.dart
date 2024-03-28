@@ -32,6 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _signInWithGoogle() async {
     try {
+      // Đăng xuất tài khoản trước khi đăng nhập tài khoản mới
+      await _googleSignIn.signOut();
+
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
 
