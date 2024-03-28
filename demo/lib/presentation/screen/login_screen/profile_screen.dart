@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:book_booking/presentation/screen/login_screen/setstate/setProfile.dart';
+import 'package:book_booking/presentation/screen/login_screen/setstate/setSetting.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart'; // Import thư viện Firestore
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key});
@@ -20,6 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Uint8List? _image;
   File? selectedImage;
+
+  bool light = true;
 
   @override
   void initState() {
@@ -55,58 +58,123 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                _image != null
-                    ? CircleAvatar(
-                        radius: 40, backgroundImage: MemoryImage(_image!))
-                    : const CircleAvatar(
-                        radius: 40,
-                        backgroundImage:
-                            AssetImage('assets/images/categories/anh6.png'),
-                      ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 1.5,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            Material(
+              elevation: 3,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          'Name: $_userName',
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        // const SizedBox(height: 20),
-                        Text(
-                          'Email: $_userEmail',
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 18),
+                        _image != null
+                            ? CircleAvatar(
+                                radius: 40,
+                                backgroundImage: MemoryImage(_image!))
+                            : const CircleAvatar(
+                                radius: 40,
+                                backgroundImage: AssetImage(
+                                    'assets/images/categories/anh6.png'),
+                              ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 1.6,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Name: $_userName',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                // const SizedBox(height: 20),
+                                Text(
+                                  'Email: $_userEmail',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 40, 40, 40),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10)),
+                        onPressed: () {
+                          showEditProfile(context);
+                        },
+                        child: const Text(
+                          'Chỉnh sửa',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ],
                 ),
-              ],
+              ),
             ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 40, 40, 40),
-                    padding: const EdgeInsets.symmetric(horizontal: 10)),
+            const SizedBox(
+              height: 10,
+            ),
+            TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.history,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      'Lịch sử đọc sách',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2
+                          ?.copyWith(color: Colors.black),
+                    ),
+                  ],
+                )),
+            const SizedBox(
+              height: 2,
+            ),
+            TextButton(
                 onPressed: () {
-                  showEditProfile(context);
+                  showSetting(context);
                 },
-                child: const Text(
-                  'Chỉnh sửa',
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.settings,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      'Cài đặt',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2
+                          ?.copyWith(color: Colors.black),
+                    ),
+                  ],
                 )),
           ],
         ),
@@ -116,150 +184,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void showEditProfile(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Color.fromARGB(200, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(200, 0, 0, 0),
         isScrollControlled: true,
         useRootNavigator: true,
         context: context,
         builder: (builder) {
-          return Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 1.15,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.all(0),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey, // Màu sắc của đường viền dưới
-                          width: 1.0, // Độ rộng của đường viền dưới
-                        ),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Chỉnh sửa hồ sơ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline2
-                            ?.copyWith(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                    child: Stack(
-                      children: [
-                        _image != null
-                            ? CircleAvatar(
-                                radius: 80,
-                                backgroundImage: MemoryImage(_image!))
-                            : const CircleAvatar(
-                                radius: 80,
-                                backgroundImage: AssetImage(
-                                    'assets/images/categories/anh6.png'),
-                              ),
-                        Positioned(
-                            bottom: 0,
-                            left: 110,
-                            child: IconButton(
-                              onPressed: () {
-                                showImagePickerOption(context);
-                              },
-                              icon: const Icon(
-                                Icons.add_a_photo,
-                                color: Colors.white,
-                              ),
-                            ))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+          return SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 1.15,
+            child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return ProfileModal(
+                  updateProfileImage: updateProfileImage,
+                );
+              },
             ),
           );
         });
   }
 
-  void showImagePickerOption(BuildContext context) {
+  void updateProfileImage(Uint8List? newImage) {
+    setState(() {
+      _image = newImage;
+    });
+  }
+
+  void showSetting(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Colors.blue[100],
-        context: context,
-        builder: (buider) {
-          return Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 4,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        _pickImageFromGallery();
-                      },
-                      child: const SizedBox(
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.image,
-                              size: 70,
-                            ),
-                            Text('Gallery')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        _pickImageFromCamera();
-                      },
-                      child: const SizedBox(
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.camera_alt,
-                              size: 70,
-                            ),
-                            Text('Camera')
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  Future _pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop(); //close the model sheet
-  }
-
-  Future _pickImageFromCamera() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop();
+      backgroundColor: const Color.fromARGB(200, 0, 0, 0),
+      context: context,
+      builder: (builder) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 3,
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return SettingsModal(); // Sử dụng SettingsModal ở đây
+            },
+          ),
+        );
+      },
+    );
   }
 }

@@ -1,10 +1,7 @@
-
-
-
-
+import 'package:book_booking/presentation/screen/home/main_screen.dart';
 import 'package:flutter/material.dart';
 
-class SplashLogin extends StatefulWidget{
+class SplashLogin extends StatefulWidget {
   final Widget? child;
   const SplashLogin({super.key, this.child});
 
@@ -12,27 +9,25 @@ class SplashLogin extends StatefulWidget{
   State<SplashLogin> createState() => _SplashLoginState();
 }
 
-class _SplashLoginState extends State<SplashLogin>{
+class _SplashLoginState extends State<SplashLogin> {
   @override
   void initState() {
     // TODO: implement initState
-    Future.delayed(
-      Duration(seconds: 3),(){
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => widget.child!), (route) =>false );
-      }
-    );
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+          (route) => false);
+    });
     super.initState();
   }
 
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Text(
-          "welcome to ", 
-          style: TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
-          ),
+          "welcome",
+          style: Theme.of(context).textTheme.headline1,
         ),
       ),
     );

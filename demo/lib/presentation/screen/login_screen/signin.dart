@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:book_booking/presentation/screen/login_screen/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_booking/presentation/screen/login_screen/signup.dart';
@@ -6,7 +7,6 @@ import 'package:book_booking/presentation/widget/form_container_widget.dart';
 import 'package:book_booking/presentation/screen/home/main_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key});
@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MainScreen()));
+                                    builder: (context) => const SplashLogin()));
                           }).catchError((error) {
                             print("Error ${error.toString()}");
                             // Handle error here, e.g., show an error message to the user
