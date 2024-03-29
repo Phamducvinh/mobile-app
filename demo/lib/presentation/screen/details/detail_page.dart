@@ -1,12 +1,12 @@
 import 'package:book_booking/app/constants/constants.dart';
 import 'package:book_booking/app/notifier/app_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/detailmodel.dart';
-
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({Key? key, required this.id, this.boxColor}) : super(key: key);
@@ -19,6 +19,16 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  var box = Hive.box("wishListId");
+  List<String> wishList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    wishList = box.get('id') ?? [];
+  }
+
   @override
   Widget build(BuildContext context) {
     String errorLink =
@@ -64,15 +74,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     bottom: 0,
                                     child: Container(
                                       height: 250,
-                                      alignment: Alignment.center,              
+                                      alignment: Alignment.center,
                                       child: Card(
                                         elevation: 10,
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                           child: Image(
-                                            image: NetworkImage(
-                                              snapshot.data?.volumeInfo?.imageLinks?.thumbnail ?? errorLink
-                                            ),
+                                            image: NetworkImage(snapshot
+                                                    .data
+                                                    ?.volumeInfo
+                                                    ?.imageLinks
+                                                    ?.thumbnail ??
+                                                errorLink),
                                             fit: BoxFit.fill,
                                           ),
                                         ),
@@ -196,13 +210,32 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ),
                                       ),
                                       OutlinedButton.icon(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          setState(() {
+                                            if (wishList.contains(
+                                                widget.id.toString())) {
+                                              wishList
+                                                  .remove(widget.id.toString());
+                                            } else {
+                                              wishList
+                                                  .add(widget.id.toString());
+                                            }
+                                          });
+                                          box.put('id', wishList);
+                                          print(wishList);
+                                        },
                                         style: OutlinedButton.styleFrom(
                                             side: const BorderSide(width: 1)),
-                                        icon: Icon(
-                                          Icons.favorite_outline,
-                                          color: AppColors.black,
-                                        ),
+                                        icon: wishList
+                                                .contains(widget.id.toString())
+                                            ? const Icon(
+                                                Icons.favorite,
+                                                color: Colors.pink,
+                                              )
+                                            : Icon(
+                                                Icons.favorite_outline,
+                                                color: AppColors.black,
+                                              ),
                                         label: Text(
                                           "WISHLIST",
                                           style: Theme.of(context)
@@ -259,7 +292,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "${snapshot.data?.volumeInfo?.authors?.length!= 0 ? snapshot.data?.volumeInfo?.authors![0] : 'Not Found'}",
+                                                "${snapshot.data?.volumeInfo?.authors?.length != 0 ? snapshot.data?.volumeInfo?.authors![0] : 'Not Found'}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headline5
@@ -280,7 +313,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     ?.copyWith(fontSize: 16),
                                               ),
                                               Text(
-                                              "${snapshot.data?.volumeInfo?.categories?.length!= 0 ? snapshot.data?.volumeInfo?.categories![0] : 'Not Found'}",
+                                                "${snapshot.data?.volumeInfo?.categories?.length != 0 ? snapshot.data?.volumeInfo?.categories![0] : 'Not Found'}",
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class AppNotifier extends ChangeNotifier {
   final BookApi bookApi = BookApi();
+  List<String> wishList = [];
 //Main api Books
   Future<Books> getBookData() async {
     var res = await bookApi.getBooks();

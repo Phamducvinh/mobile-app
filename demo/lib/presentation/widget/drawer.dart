@@ -1,3 +1,4 @@
+import 'package:book_booking/presentation/screen/wish_list/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -167,7 +168,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const WishListScreen()));
+            },
             leading: const Icon(
               Icons.favorite,
               color: Colors.black,
